@@ -1,0 +1,7 @@
+# Project exclude paths
+/music-common/music-common-core/target/
+/music-common/music-common-mybatis/target/
+/music-common/music-common-redis/target/
+/music-common/music-common-security/target/
+/music-common/music-common-swagger/target/
+/music-system/target/

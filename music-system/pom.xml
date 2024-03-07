@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <groupId>com.whf</groupId>
+        <artifactId>music-server-cloud</artifactId>
+        <version>${revision}</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>music-system</artifactId>
+    <name>music-system</name>
+    <description>music-server 接口模块</description>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.whf</groupId>
+            <artifactId>music-common-core</artifactId>
+            <version>${revision}</version>
+        </dependency>
+        <!-- mybatis -->
+        <dependency>
+            <groupId>com.whf</groupId>
+            <artifactId>music-common-mybatis</artifactId>
+            <version>${revision}</version>
+        </dependency>
+        <!-- swagger -->
+        <dependency>
+            <groupId>com.whf</groupId>
+            <artifactId>music-common-swagger</artifactId>
+            <version>${revision}</version>
+        </dependency>
+        <!-- 认证 -->
+        <dependency>
+            <groupId>com.whf</groupId>
+            <artifactId>music-common-security</artifactId>
+            <version>${revision}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.mapstruct</groupId>
+            <artifactId>mapstruct</artifactId>
+            <version>${mapstruct.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mapstruct</groupId>
+            <artifactId>mapstruct-jdk8</artifactId>
+            <version>${mapstruct.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mapstruct</groupId>
+            <artifactId>mapstruct-processor</artifactId>
+            <version>${mapstruct.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${spring-boot.version}</version>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
