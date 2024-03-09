@@ -73,6 +73,7 @@
 
     <modules>
         <module>music-common</module>
+        <module>music-gateway</module>
         <module>music-system</module>
     </modules>
     <packaging>pom</packaging>
