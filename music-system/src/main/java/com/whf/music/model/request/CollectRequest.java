@@ -21,7 +21,7 @@ public class CollectRequest {
     @NotNull(message = "歌曲id不能为空")
     private Integer songId;
 
-    @NotNull(message = "专辑id不能为空")
+    //    @NotNull(message = "专辑id不能为空")
     private Integer songListId;
 
     private Date createTime;

@@ -42,12 +42,14 @@ public class UserController {
         return R.success(userService.removeById(id));
     }
 
+
     /**
      * 更新用户信息
      */
     @PostMapping("/update")
     public R<Boolean> updateUserMsg(@RequestBody UserRequest updateRequest) {
-        return R.success(userService.updateUserMsg(updateRequest));
+        Boolean result = userService.updateUserMsg(updateRequest);
+        return R.success(result, result ? "更新信息成功！" : "更新信息失败，请重试！");
     }
 
     /**
@@ -55,7 +57,8 @@ public class UserController {
      */
     @PostMapping("/updatePassword")
     public R<Boolean> updatePassword(@RequestBody UserRequest updatePasswordRequest) {
-        return R.success(userService.updatePassword(updatePasswordRequest));
+        Boolean result = userService.updatePassword(updatePasswordRequest);
+        return R.success(result, result ? "更新密码成功！" : "更新密码失败，请重试！");
     }
 
     /**

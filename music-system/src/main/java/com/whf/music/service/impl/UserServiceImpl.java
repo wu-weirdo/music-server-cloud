@@ -61,7 +61,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
             throw new ServiceException(ResultEnum.FILE_UPLOAD_ERROR.getCode(), "图片上传失败");
         }
         File dest = new File(filePath + System.getProperty("file.separator") + fileName);
-        String imgPath = "/img/avatorImages/" + fileName;
+        String imgPath = "/resource/img/avatorImages/" + fileName;
         try {
             avatorFile.transferTo(dest);
         } catch (IOException e) {

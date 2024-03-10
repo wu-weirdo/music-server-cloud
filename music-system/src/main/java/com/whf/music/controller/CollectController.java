@@ -32,7 +32,8 @@ public class CollectController {
      */
     @PostMapping("/add")
     public R<Boolean> addCollection(@RequestBody @Valid CollectRequest addCollectRequest) {
-        return R.success(collectService.addCollect(addCollectRequest));
+        Boolean result = collectService.addCollect(addCollectRequest);
+        return R.success(result, result ? "收藏成功！" : "收藏失败，请重试！");
     }
 
     /**
@@ -44,7 +45,8 @@ public class CollectController {
      */
     @DeleteMapping("/delete")
     public R<Boolean> deleteCollection(@RequestParam Integer userId, @RequestParam Integer songId) {
-        return R.success(collectService.deleteCollect(userId, songId));
+        Boolean result = collectService.deleteCollect(userId, songId);
+        return R.success(result, result ? "取消收藏成功！" : "取消收藏失败，请重试！");
     }
 
 
