@@ -30,12 +30,6 @@ public class SecurityFilterConfig extends WebSecurityConfigurerAdapter {
     private List<String> ignoreUrls;
 
     /**
-     * 自定义用户认证逻辑
-     */
-    @Resource
-    private UserDetailsService userDetailsService;
-
-    /**
      * token认证过滤器
      */
     @Resource
@@ -52,18 +46,6 @@ public class SecurityFilterConfig extends WebSecurityConfigurerAdapter {
      */
     @Resource
     private AuthenticationEntryPointImpl unauthorizedHandler;
-
-    /**
-     * 解决 无法直接注入 AuthenticationManager
-     *
-     * @return {@code AuthenticationManager}
-     * @throws Exception 异常
-     */
-    @Bean
-    @Override
-    public AuthenticationManager authenticationManagerBean() throws Exception {
-        return super.authenticationManagerBean();
-    }
 
     /**
      * anyRequest          |   匹配所有请求路径
@@ -113,13 +95,5 @@ public class SecurityFilterConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
-    }
-
-    /**
-     * 身份认证接口
-     */
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
     }
 }

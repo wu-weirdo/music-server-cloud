@@ -22,7 +22,16 @@ import reactor.core.publisher.Mono;
  */
 @Configuration
 public class CorsConfig {
+
+    /**
+     * 这里为支持的请求头，如果有自定义的header字段请自己添加
+     */
+    private static final String ALLOWED_HEADERS = "X-Requested-With, Content-Language, Content-Type, Authorization, credential, X-XSRF-TOKEN, isToken, token, Admin-Token, App-Token";
+    private static final String ALLOWED_METHODS = "GET,POST,PUT,DELETE,OPTIONS,HEAD";
+    private static final String ALLOWED_ORIGIN = "*";
+    private static final String ALLOWED_EXPOSE = "*";
     private static final String MAX_AGE = "18000L";
+
 
     @Bean
     public WebFilter corsFilter() {
@@ -31,18 +40,14 @@ public class CorsConfig {
             if (!CorsUtils.isCorsRequest(request)) {
                 return chain.filter(ctx);
             }
-            HttpHeaders requestHeaders = request.getHeaders();
             ServerHttpResponse response = ctx.getResponse();
-            HttpMethod requestMethod = requestHeaders.getAccessControlRequestMethod();
             HttpHeaders headers = response.getHeaders();
-            headers.add(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN, requestHeaders.getOrigin());
-            headers.addAll(HttpHeaders.ACCESS_CONTROL_ALLOW_HEADERS, requestHeaders.getAccessControlRequestHeaders());
-            if (requestMethod != null) {
-                headers.add(HttpHeaders.ACCESS_CONTROL_ALLOW_METHODS, requestMethod.name());
-            }
-            headers.add(HttpHeaders.ACCESS_CONTROL_ALLOW_CREDENTIALS, "true");
-            headers.add(HttpHeaders.ACCESS_CONTROL_EXPOSE_HEADERS, "*");
+            headers.add(HttpHeaders.ACCESS_CONTROL_ALLOW_HEADERS, ALLOWED_HEADERS);
+            headers.add(HttpHeaders.ACCESS_CONTROL_ALLOW_METHODS, ALLOWED_METHODS);
+            headers.add(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN, ALLOWED_ORIGIN);
+            headers.add(HttpHeaders.ACCESS_CONTROL_EXPOSE_HEADERS, ALLOWED_EXPOSE);
             headers.add(HttpHeaders.ACCESS_CONTROL_MAX_AGE, MAX_AGE);
+            headers.add(HttpHeaders.ACCESS_CONTROL_ALLOW_CREDENTIALS, "true");
             if (request.getMethod() == HttpMethod.OPTIONS) {
                 response.setStatusCode(HttpStatus.OK);
                 return Mono.empty();

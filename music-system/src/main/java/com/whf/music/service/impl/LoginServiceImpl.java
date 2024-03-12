@@ -6,14 +6,18 @@ import com.whf.music.excepetion.ServiceException;
 import com.whf.music.model.domain.User;
 import com.whf.music.model.request.LoginRequest;
 import com.whf.music.model.request.RegisterRequest;
+import com.whf.music.model.request.ThirdLoginRequest;
 import com.whf.music.service.LoginService;
 import com.whf.music.service.TokenService;
 import com.whf.music.service.UserService;
+import com.whf.music.third.ThirdAuthenticationToken;
+import com.whf.music.third.ThirdLogin;
 import com.whf.music.utils.ExceptionUtils;
 import com.whf.music.utils.SecurityUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
@@ -82,5 +86,31 @@ public class LoginServiceImpl implements LoginService {
         user.setAvator("/resource/img/avatorImages/user.jpg");
         user.setCreateTime(new Date());
         return userService.save(user);
+    }
+
+    /**
+     * 第三方登录
+     *
+     * @param request 请求
+     * @return {@code LoginUser}
+     */
+    @Override
+    public LoginUser thirdLogin(ThirdLoginRequest request) {
+        Authentication authenticate;
+        try {
+            //转换对象
+            ThirdLogin thirdLogin = new ThirdLogin();
+            BeanUtils.copyProperties(request, thirdLogin);
+            //用户认证
+            authenticate = authenticationManager.authenticate(new ThirdAuthenticationToken(thirdLogin));
+        } catch (BadCredentialsException e) {
+            throw new ServiceException("第三方登录失败");
+        }
+        //获取用户信息
+        LoginUser loginUser = (LoginUser) authenticate.getPrincipal();
+        //生成token
+        String token = tokenService.createToken(loginUser);
+        loginUser.setToken(token);
+        return loginUser;
     }
 }

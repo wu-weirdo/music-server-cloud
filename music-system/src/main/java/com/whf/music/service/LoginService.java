@@ -3,6 +3,7 @@ package com.whf.music.service;
 import com.whf.music.entity.LoginUser;
 import com.whf.music.model.request.LoginRequest;
 import com.whf.music.model.request.RegisterRequest;
+import com.whf.music.model.request.ThirdLoginRequest;
 
 /**
  * @author whf
@@ -25,4 +26,12 @@ public interface LoginService {
      * @return {@code Object}
      */
     Boolean register(RegisterRequest request);
+
+    /**
+     * 第三方登录
+     *
+     * @param request 请求
+     * @return {@code LoginUser}
+     */
+    LoginUser thirdLogin(ThirdLoginRequest request);
 }

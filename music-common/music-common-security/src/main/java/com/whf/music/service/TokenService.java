@@ -29,19 +29,19 @@ public class TokenService {
     /**
      * 令牌自定义标识
      */
-    @Value("${jwt.header}")
+    @Value("${jwt.header:Authorization}")
     private String header;
 
     /**
      * 令牌秘钥
      */
-    @Value("${jwt.secret}")
+    @Value("${jwt.secret:abcdefghijklmnopqrstuvwxyz}")
     private String secret;
 
     /**
      * 令牌有效期（默认30分钟）
      */
-    @Value("${jwt.expiration}")
+    @Value("${jwt.expiration:30}")
     private int expiration;
 
     private static final Long MILLIS_MINUTE_TWENTY = 20 * 60 * 1000L;

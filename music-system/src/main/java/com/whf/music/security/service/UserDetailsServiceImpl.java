@@ -1,4 +1,4 @@
-package com.whf.music.security;
+package com.whf.music.security.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.whf.music.convert.UserConvert;

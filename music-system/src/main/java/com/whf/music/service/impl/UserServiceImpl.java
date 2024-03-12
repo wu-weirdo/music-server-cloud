@@ -11,9 +11,12 @@ import com.whf.music.model.request.UserRequest;
 import com.whf.music.service.UserService;
 import com.whf.music.utils.ExceptionUtils;
 import com.whf.music.utils.SecurityUtils;
+import com.whf.music.utils.UUID;
 import lombok.extern.slf4j.Slf4j;
+import me.zhyd.oauth.model.AuthUser;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -25,6 +28,9 @@ import java.util.Objects;
 @Slf4j
 public class UserServiceImpl extends ServiceImpl<UserMapper, User>
         implements UserService {
+
+    @Value("${music.security.initPassword:123456}")
+    private String initPassword;
 
     @Autowired
     private UserMapper userMapper;
@@ -51,7 +57,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
     }
 
     @Override
-    public Boolean updateUserAvator(MultipartFile avatorFile, int id) {
+    public Boolean updateUserAvator(MultipartFile avatorFile, Long id) {
         String fileName = System.currentTimeMillis() + avatorFile.getOriginalFilename();
         //路径 他这个会根据你的系统获取对应的文件分隔符
         String filePath = Constants.PROJECT_PATH + System.getProperty("file.separator") + "img" + System.getProperty("file.separator") + "avatorImages";
@@ -86,5 +92,24 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("user_name",userName);
         return userMapper.selectOne(queryWrapper);
+    }
+
+    @Override
+    public User saveByAuthUser(AuthUser authUser) {
+        String userName = authUser.getUsername();
+        if (existUser(userName)) {
+            log.warn("用户名重复 openId:{} userName:{}", authUser.getUuid(), userName);
+            userName += UUID.randomUUID().toString(true);
+        }
+        String password = SecurityUtils.encryptPassword(initPassword);
+        User user = new User();
+        user.setUserName(userName);
+        user.setPassword(password);
+        user.setEmail(authUser.getEmail());
+        user.setIntroduction(authUser.getRemark());
+        user.setLocation(authUser.getLocation());
+        user.setAvator(authUser.getAvatar());
+        this.save(user);
+        return user;
     }
 }

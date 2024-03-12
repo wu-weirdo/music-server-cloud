@@ -4,6 +4,7 @@ import com.whf.music.common.R;
 import com.whf.music.entity.LoginUser;
 import com.whf.music.model.request.LoginRequest;
 import com.whf.music.model.request.RegisterRequest;
+import com.whf.music.model.request.ThirdLoginRequest;
 import com.whf.music.service.LoginService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -35,5 +36,10 @@ public class LoginController {
         } else {
             return R.error("注册失败");
         }
+    }
+
+    @PostMapping("/login/third")
+    public R<LoginUser> third(@RequestBody ThirdLoginRequest request) {
+        return R.success(loginService.thirdLogin(request), "登录成功");
     }
 }
