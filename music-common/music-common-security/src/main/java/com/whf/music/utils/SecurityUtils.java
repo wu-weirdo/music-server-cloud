@@ -1,5 +1,7 @@
 package com.whf.music.utils;
 
+import com.whf.music.entity.LoginUser;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 /**
@@ -9,6 +11,20 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
  * @date 2024/3/5
  */
 public class SecurityUtils {
+
+    /**
+     * 获取用户信息
+     */
+    public static LoginUser getUser() {
+        LoginUser user;
+        try {
+            user = (LoginUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        } catch (Exception e) {
+            return null;
+        }
+
+        return user;
+    }
 
     /**
      * 生成BCryptPasswordEncoder密码

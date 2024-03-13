@@ -25,5 +25,10 @@
             <artifactId>music-common-security</artifactId>
             <version>${revision}</version>
         </dependency>
+        <dependency>
+            <groupId>org.lionsoul</groupId>
+            <artifactId>ip2region</artifactId>
+            <version>${ip2region.version}</version>
+        </dependency>
     </dependencies>
 </project>

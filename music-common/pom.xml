@@ -18,5 +18,6 @@
         <module>music-common-security</module>
         <module>music-common-core</module>
         <module>music-common-swagger</module>
+        <module>music-common-log</module>
     </modules>
 </project>

@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 @JsonIgnoreProperties({"enabled", "accountNonExpired", "accountNonLocked", "credentialsNonExpired", "authorities", "password", "username"})
 public class LoginUser implements UserDetails {
 
-    private Integer id;
+    private Long id;
 
     private String userName;
 
