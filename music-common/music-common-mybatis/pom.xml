@@ -8,7 +8,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>music-common-mybatis</artifactId>
-    <name>music-mybatis</name>
+    <name>music-common-mybatis</name>
     <description>music-server mybatis模块</description>
 
     <dependencies>
