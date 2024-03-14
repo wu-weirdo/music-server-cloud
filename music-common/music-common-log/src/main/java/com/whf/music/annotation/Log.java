@@ -22,6 +22,12 @@ public @interface Log {
     String module() default "";
 
     /**
+     * 描述
+     * @return
+     */
+    String description() default "";
+
+    /**
      * 功能
      */
     BusinessType businessType() default BusinessType.OTHER;

@@ -28,6 +28,11 @@ public class OperationLogEvent implements Serializable {
     private String module;
 
     /**
+     * 操作描述
+     */
+    private String description;
+
+    /**
      * 业务类型（0其它 1新增 2修改 3删除）
      */
     private Integer businessType;

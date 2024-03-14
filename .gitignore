@@ -5,3 +5,4 @@
 /music-common/music-common-security/target/
 /music-common/music-common-swagger/target/
 /music-system/target/
+.flattened-pom.xml

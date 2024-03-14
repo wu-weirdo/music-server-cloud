@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <groupId>com.whf</groupId>
+        <artifactId>music-system</artifactId>
+        <version>${revision}</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>music-system-api</artifactId>
+    <name>music-system-api</name>
+    <description>music-system-api</description>
+    <dependencies>
+        <dependency>
+            <groupId>com.whf</groupId>
+            <artifactId>music-common-core</artifactId>
+            <version>${revision}</version>
+        </dependency>
+        <!-- mybatis -->
+        <dependency>
+            <groupId>com.whf</groupId>
+            <artifactId>music-common-mybatis</artifactId>
+            <version>${revision}</version>
+        </dependency>
+        <!-- swagger -->
+        <dependency>
+            <groupId>com.whf</groupId>
+            <artifactId>music-common-swagger</artifactId>
+            <version>${revision}</version>
+        </dependency>
+        <!-- dubbo -->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-dubbo</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+    </dependencies>
+
+</project>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.whf.music.mapper.SysLogMapper">
+
+    <resultMap id="BaseResultMap" type="com.whf.music.domain.SysLog">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="module" column="module" jdbcType="VARCHAR"/>
+            <result property="description" column="description" jdbcType="VARCHAR"/>
+            <result property="businessType" column="business_type" jdbcType="TINYINT"/>
+            <result property="method" column="method" jdbcType="VARCHAR"/>
+            <result property="reqMethod" column="req_method" jdbcType="VARCHAR"/>
+            <result property="operatorType" column="operator_type" jdbcType="TINYINT"/>
+            <result property="operatorId" column="operator_id" jdbcType="BIGINT"/>
+            <result property="operatorName" column="operator_name" jdbcType="VARCHAR"/>
+            <result property="reqUrl" column="req_url" jdbcType="VARCHAR"/>
+            <result property="ip" column="ip" jdbcType="VARCHAR"/>
+            <result property="location" column="location" jdbcType="VARCHAR"/>
+            <result property="reqParam" column="req_param" jdbcType="VARCHAR"/>
+            <result property="respResult" column="resp_result" jdbcType="VARCHAR"/>
+            <result property="status" column="status" jdbcType="TINYINT"/>
+            <result property="errorMsg" column="error_msg" jdbcType="VARCHAR"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,module,description,
+        business_type,method,req_method,
+        operator_type,operator_id,operator_name,
+        req_url,ip,location,
+        req_param,resp_result,status,
+        error_msg,create_time,update_time
+    </sql>
+</mapper>

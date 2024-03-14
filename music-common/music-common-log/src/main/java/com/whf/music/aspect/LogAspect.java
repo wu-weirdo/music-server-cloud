@@ -76,6 +76,8 @@ public class LogAspect {
             OperationLogEvent event = new OperationLogEvent();
             // 设置模块
             event.setModule(operationLog.module());
+            // 设置描述
+            event.setDescription(operationLog.description());
             // 设置业务类型
             event.setBusinessType(operationLog.businessType().ordinal());
             // 设置操作类型

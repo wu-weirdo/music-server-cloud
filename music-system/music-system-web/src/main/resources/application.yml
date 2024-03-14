@@ -1,0 +1,63 @@
+#server:
+#  port: 8080
+
+#spring:
+#  datasource:
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    url: jdbc:mysql://127.0.0.1:3306/tp_music?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai
+#    username: root
+#    password: 123456
+#
+#  redis:
+#    host: 127.0.0.1
+#    port: 6379
+#    database: 0
+#    timeout: 10000
+#
+#  mvc:
+#    pathmatch:
+#      matching-strategy: ANT_PATH_MATCHER
+#
+#mybatis-plus:
+#  mapper-locations: classpath*:/mapper/*.xml
+#  # 实体扫描，多个package用逗号或者分号分隔
+#  typeAliasesPackage: com.whf.music.model.domain
+#  global-config:
+#    # 数据库相关配置
+#    db-config:
+#      # ID自增
+#      id-type: AUTO
+#
+
+#dubbo:
+#  application:
+#    name: music-system
+#  protocol:
+#    # 如需使用 Triple 3.0 新协议 可查看官方文档
+#    # 使用 dubbo 协议通信
+#    name: dubbo
+#    # dubbo 协议端口(-1表示自增端口,从20880开始)
+#    port: -1
+#  # 指定dubbo协议注册ip
+#  registry:
+#    address: nacos://127.0.0.1:8848
+#  # 消费者相关配置
+#  consumer:
+#    timeout: 5000
+#  # 超时时间
+#  scan:
+#    # 接口实现类扫描
+#    base-packages: com.whf.music.dubbo
+
+#jwt:
+#  header: Authorization
+#  secret: abcdefghijklmnopqrstuvwxyz
+#  # token 过期时间/分钟
+#  expiration: 30
+#  prefix: Bearer
+#
+#music:
+#  security:
+#    initPassword: 123456
+#
+#ignoreUrls: /login,/register,/resource/**,/swagger-ui/*,/webjars/*,/v3/api-docs/*,/v3/*
