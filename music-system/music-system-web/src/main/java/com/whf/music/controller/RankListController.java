@@ -1,6 +1,9 @@
 package com.whf.music.controller;
 
+import com.whf.music.annotation.Log;
 import com.whf.music.common.R;
+import com.whf.music.enums.BusinessType;
+import com.whf.music.enums.OperatorType;
 import com.whf.music.request.RankListRequest;
 import com.whf.music.service.RankListService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +24,10 @@ public class RankListController {
      * @return {@code R}
      */
     @PostMapping("/add")
+    @Log(module = "评分管理", description = "提交评分", businessType = BusinessType.INSERT, operatorType = OperatorType.CLIENT)
     public R<Boolean> addRank(@RequestBody RankListRequest rankListAddRequest) {
-        return R.success(rankListService.addRank(rankListAddRequest));
+        Boolean result = rankListService.addRank(rankListAddRequest);
+        return R.success(result, result ? "评分成功！" : "评分失败！");
     }
 
 

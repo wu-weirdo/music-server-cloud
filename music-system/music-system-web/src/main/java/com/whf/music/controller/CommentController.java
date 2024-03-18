@@ -1,7 +1,10 @@
 package com.whf.music.controller;
 
+import com.whf.music.annotation.Log;
 import com.whf.music.common.R;
 import com.whf.music.domain.Comment;
+import com.whf.music.enums.BusinessType;
+import com.whf.music.enums.OperatorType;
 import com.whf.music.request.CommentRequest;
 import com.whf.music.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +32,7 @@ public class CommentController {
      * @return {@code R}
      */
     @PostMapping("/add")
+    @Log(module = "评论管理", description = "添加评论", businessType = BusinessType.INSERT, operatorType = OperatorType.CLIENT)
     public R<Boolean> addComment(@RequestBody CommentRequest addCommentRequest) {
         return R.success(commentService.addComment(addCommentRequest));
     }
@@ -40,6 +44,7 @@ public class CommentController {
      * @return {@code R}
      */
     @GetMapping("/delete")
+    @Log(module = "评论管理", description = "删除评论", businessType = BusinessType.DELETE, operatorType = OperatorType.CLIENT)
     public R<Boolean> deleteComment(@RequestParam Integer id) {
         return R.success(commentService.deleteComment(id));
     }
@@ -73,6 +78,7 @@ public class CommentController {
      * @return {@code R}
      */
     @PostMapping("/like")
+    @Log(module = "评论管理", description = "点赞", businessType = BusinessType.INSERT, operatorType = OperatorType.CLIENT)
     public R<Boolean> commentOfLike(@RequestBody CommentRequest upCommentRequest) {
         return R.success(commentService.updateCommentMsg(upCommentRequest));
     }

@@ -1,7 +1,10 @@
 package com.whf.music.controller;
 
+import com.whf.music.annotation.Log;
 import com.whf.music.common.R;
 import com.whf.music.domain.Singer;
+import com.whf.music.enums.BusinessType;
+import com.whf.music.enums.OperatorType;
 import com.whf.music.request.SingerRequest;
 import com.whf.music.service.SingerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,8 +34,10 @@ public class SingerController {
      * @return {@code R}
      */
     @PostMapping("/add")
+    @Log(module = "歌手管理", description = "添加歌手", businessType = BusinessType.INSERT, operatorType = OperatorType.MANAGE)
     public R<Boolean> addSinger(@RequestBody SingerRequest addSingerRequest) {
-        return R.success(singerService.addSinger(addSingerRequest));
+        Boolean result = singerService.addSinger(addSingerRequest);
+        return R.success(result, result ? "添加成功！" : "添加失败！");
     }
 
     /**
@@ -42,8 +47,10 @@ public class SingerController {
      * @return {@code R}
      */
     @DeleteMapping("/delete")
+    @Log(module = "歌手管理", description = "删除歌手", businessType = BusinessType.DELETE, operatorType = OperatorType.MANAGE)
     public R<Boolean> deleteSinger(@RequestParam int id) {
-        return R.success(singerService.deleteSinger(id));
+        Boolean result = singerService.deleteSinger(id);
+        return R.success(result, result ? "删除成功！" : "删除失败！");
     }
 
     /**
@@ -86,8 +93,10 @@ public class SingerController {
      * @return {@code R}
      */
     @PostMapping("/update")
+    @Log(module = "歌手管理", description = "更新歌手", businessType = BusinessType.UPDATE, operatorType = OperatorType.MANAGE)
     public R<Boolean> updateSingerMsg(@RequestBody SingerRequest updateSingerRequest) {
-        return R.success(singerService.updateSingerMsg(updateSingerRequest));
+        Boolean result = singerService.updateSingerMsg(updateSingerRequest);
+        return R.success(result, result ? "更新成功！" : "更新失败！");
     }
 
     /**
@@ -98,7 +107,9 @@ public class SingerController {
      * @return {@code R}
      */
     @PostMapping("/avatar/update")
+    @Log(module = "歌手管理", description = "更新歌手图片", businessType = BusinessType.UPDATE, operatorType = OperatorType.MANAGE)
     public R<Boolean> updateSingerPic(@RequestParam("file") MultipartFile avatorFile, @RequestParam("id") int id) {
-        return R.success(singerService.updateSingerPic(avatorFile, id));
+        Boolean result = singerService.updateSingerPic(avatorFile, id);
+        return R.success(result, result ? "更新成功！" : "更新失败！");
     }
 }

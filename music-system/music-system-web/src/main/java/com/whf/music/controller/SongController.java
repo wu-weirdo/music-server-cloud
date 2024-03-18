@@ -1,7 +1,10 @@
 package com.whf.music.controller;
 
+import com.whf.music.annotation.Log;
 import com.whf.music.common.R;
 import com.whf.music.domain.Song;
+import com.whf.music.enums.BusinessType;
+import com.whf.music.enums.OperatorType;
 import com.whf.music.reponse.TreeResponse;
 import com.whf.music.request.SongRequest;
 import com.whf.music.service.SongService;
@@ -26,8 +29,10 @@ public class SongController {
      * @return {@code R}
      */
     @PostMapping("/add")
+    @Log(module = "歌曲管理", description = "添加歌曲", businessType = BusinessType.INSERT, operatorType = OperatorType.MANAGE)
     public R<Boolean> addSong(SongRequest addSongRequest, @RequestParam("file") MultipartFile mpfile) {
-        return R.success(songService.addSong(addSongRequest, mpfile));
+        Boolean result = songService.addSong(addSongRequest, mpfile);
+        return R.success(result, result ? "添加成功！" : "添加失败！");
     }
 
 
@@ -38,8 +43,10 @@ public class SongController {
      * @return {@code R}
      */
     @DeleteMapping("/delete")
+    @Log(module = "歌曲管理", description = "删除歌曲", businessType = BusinessType.DELETE, operatorType = OperatorType.MANAGE)
     public R<Boolean> deleteSong(@RequestParam Integer id) {
-        return R.success(songService.deleteSong(id));
+        Boolean result = songService.deleteSong(id);
+        return R.success(result, result ? "删除成功！" : "删除失败！");
     }
 
 
@@ -71,8 +78,10 @@ public class SongController {
      * @return {@code R}
      */
     @PostMapping("/update")
+    @Log(module = "歌曲管理", description = "更新歌曲", businessType = BusinessType.UPDATE, operatorType = OperatorType.MANAGE)
     public R<Boolean> updateSongMsg(@RequestBody SongRequest updateSongRequest) {
-        return R.success(songService.updateSongMsg(updateSongRequest));
+        Boolean result = songService.updateSongMsg(updateSongRequest);
+        return R.success(result, result ? "更新成功！" : "更新失败！");
     }
 
 
@@ -84,8 +93,10 @@ public class SongController {
      * @return {@code R}
      */
     @PostMapping("/img/update")
+    @Log(module = "歌曲管理", description = "更新歌曲图片", businessType = BusinessType.UPDATE, operatorType = OperatorType.MANAGE)
     public R<Boolean> updateSongPic(@RequestParam("file") MultipartFile urlFile, @RequestParam("id") Integer id) {
-        return R.success(songService.updateSongPic(urlFile, id));
+        Boolean result = songService.updateSongPic(urlFile, id);
+        return R.success(result, result ? "更新成功！" : "更新失败！");
     }
 
     /**
@@ -96,7 +107,9 @@ public class SongController {
      * @return {@code R}
      */
     @PostMapping("/url/update")
+    @Log(module = "歌曲管理", description = "更新歌曲文件", businessType = BusinessType.UPDATE, operatorType = OperatorType.MANAGE)
     public R<Boolean> updateSongUrl(@RequestParam("file") MultipartFile urlFile, @RequestParam("id") Integer id) {
-        return R.success(songService.updateSongUrl(urlFile, id));
+        Boolean result = songService.updateSongUrl(urlFile, id);
+        return R.success(result, result ? "更新成功！" : "更新失败！");
     }
 }

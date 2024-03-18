@@ -1,6 +1,9 @@
 package com.whf.music.controller;
 
+import com.whf.music.annotation.Log;
 import com.whf.music.domain.Song;
+import com.whf.music.enums.BusinessType;
+import com.whf.music.enums.OperatorType;
 import com.whf.music.service.SongService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.FileSystemResource;
@@ -32,6 +35,7 @@ public class DownloadController {
     private SongService songService;
 
     @RequestMapping("/song")
+    @Log(module = "下载管理", description = "下载文件", businessType = BusinessType.OTHER, operatorType = OperatorType.MANAGE)
     public ResponseEntity<InputStreamResource> downloadFile(@RequestParam("songId") Long songId) throws IOException {
         log.info("download song id:{}", songId);
         Song song = songService.getById(songId);

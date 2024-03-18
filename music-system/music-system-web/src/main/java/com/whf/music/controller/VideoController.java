@@ -2,8 +2,11 @@ package com.whf.music.controller;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.whf.music.annotation.Log;
 import com.whf.music.common.R;
 import com.whf.music.domain.Video;
+import com.whf.music.enums.BusinessType;
+import com.whf.music.enums.OperatorType;
 import com.whf.music.reponse.TreeResponse;
 import com.whf.music.service.VideoService;
 import org.springframework.web.bind.annotation.*;
@@ -61,6 +64,7 @@ public class VideoController {
      * @return 新增结果
      */
     @PostMapping("add")
+    @Log(module = "视频管理", description = "新增视频", businessType = BusinessType.UPDATE, operatorType = OperatorType.MANAGE)
     public R<Boolean> insert(@RequestBody Video video, @RequestParam("file") MultipartFile file) {
         return R.success(this.videoService.addVideo(video, file));
     }
@@ -72,8 +76,10 @@ public class VideoController {
      * @return 修改结果
      */
     @PostMapping("update")
+    @Log(module = "视频管理", description = "更新视频信息", businessType = BusinessType.UPDATE, operatorType = OperatorType.MANAGE)
     public R<Boolean> update(@RequestBody Video video) {
-        return R.success(this.videoService.updateById(video));
+        boolean result = this.videoService.updateById(video);
+        return R.success(result, result ? "更新成功！" : "更新失败！");
     }
 
     /**
@@ -83,8 +89,10 @@ public class VideoController {
      * @return 删除结果
      */
     @GetMapping("delete")
+    @Log(module = "视频管理", description = "删除视频", businessType = BusinessType.DELETE, operatorType = OperatorType.MANAGE)
     public R<Boolean> delete(@RequestParam("idList") List<Long> idList) {
-        return R.success(this.videoService.removeByIds(idList));
+        boolean result = this.videoService.removeByIds(idList);
+        return R.success(result, result ? "删除成功！" : "删除失败！");
     }
 
     /**
@@ -95,8 +103,10 @@ public class VideoController {
      * @return {@code R}
      */
     @PostMapping("img/update")
+    @Log(module = "视频管理", description = "更新视频图片", businessType = BusinessType.UPDATE, operatorType = OperatorType.MANAGE)
     public R<Boolean> updatePic(@RequestParam("file") MultipartFile urlFile, @RequestParam("id") Integer id) {
-        return R.success(videoService.updatePic(urlFile, id));
+        boolean result = videoService.updatePic(urlFile, id);
+        return R.success(result, result ? "更新成功！" : "更新失败！");
     }
 
     /**
@@ -107,8 +117,10 @@ public class VideoController {
      * @return {@code R}
      */
     @PostMapping("url/update")
+    @Log(module = "视频管理", description = "更新视频文件", businessType = BusinessType.UPDATE, operatorType = OperatorType.MANAGE)
     public R<Boolean> updateVideo(@RequestParam("file") MultipartFile urlFile, @RequestParam("id") Integer id) {
-        return  R.success(videoService.updateVideo(urlFile, id));
+        boolean result = videoService.updateVideo(urlFile, id);
+        return R.success(result, result ? "更新成功！" : "更新失败！");
     }
 
     /**
@@ -118,7 +130,7 @@ public class VideoController {
      */
     @GetMapping("tree")
     public R<List<TreeResponse>> singerVideoTree() {
-        return  R.success(videoService.singerVideoTree());
+        return R.success(videoService.singerVideoTree());
     }
 }
 

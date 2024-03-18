@@ -1,7 +1,10 @@
 package com.whf.music.controller;
 
+import com.whf.music.annotation.Log;
 import com.whf.music.common.R;
 import com.whf.music.domain.SongList;
+import com.whf.music.enums.BusinessType;
+import com.whf.music.enums.OperatorType;
 import com.whf.music.request.SongListRequest;
 import com.whf.music.service.SongListService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,16 +31,20 @@ public class SongListController {
      * 添加专辑
      */
     @PostMapping("/add")
+    @Log(module = "专辑管理", description = "添加专辑", businessType = BusinessType.INSERT, operatorType = OperatorType.MANAGE)
     public R<Boolean> addSongList(@RequestBody SongListRequest addSongListRequest) {
-        return R.success(songListService.addSongList(addSongListRequest));
+        Boolean result = songListService.addSongList(addSongListRequest);
+        return R.success(result, result ? "添加成功！" : "添加失败！");
     }
 
     /**
      * 删除专辑
      */
     @GetMapping("/delete")
+    @Log(module = "专辑管理", description = "删除专辑", businessType = BusinessType.DELETE, operatorType = OperatorType.MANAGE)
     public R<Boolean> deleteSongList(@RequestParam Integer id) {
-        return R.success(songListService.deleteSongList(id));
+        Boolean result = songListService.deleteSongList(id);
+        return R.success(result, result ? "删除成功！" : "删除失败！");
     }
 
     /**
@@ -59,8 +66,10 @@ public class SongListController {
      * @return {@code R<Boolean>}
      */
     @PostMapping("/update")
+    @Log(module = "专辑管理", description = "更新专辑信息", businessType = BusinessType.UPDATE, operatorType = OperatorType.MANAGE)
     public R<Boolean> updateSongListMsg(@RequestBody SongListRequest request) {
-        return R.success(songListService.updateSongListMsg(request));
+        Boolean result = songListService.updateSongListMsg(request);
+        return R.success(result, result ? "更新成功！" : "更新失败！");
 
     }
 
@@ -72,7 +81,9 @@ public class SongListController {
      * @return {@code R<Boolean>}
      */
     @PostMapping("/img/update")
+    @Log(module = "专辑管理", description = "更新专辑图片", businessType = BusinessType.UPDATE, operatorType = OperatorType.MANAGE)
     public R<Boolean> updateSongListPic(@RequestParam("file") MultipartFile avatorFile, @RequestParam("id") Integer id) {
-        return R.success(songListService.updateSongListImg(avatorFile, id));
+        Boolean result = songListService.updateSongListImg(avatorFile, id);
+        return R.success(result, result ? "更新成功！" : "更新失败！");
     }
 }

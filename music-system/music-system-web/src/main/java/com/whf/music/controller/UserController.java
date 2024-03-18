@@ -1,7 +1,10 @@
 package com.whf.music.controller;
 
+import com.whf.music.annotation.Log;
 import com.whf.music.common.R;
 import com.whf.music.domain.User;
+import com.whf.music.enums.BusinessType;
+import com.whf.music.enums.OperatorType;
 import com.whf.music.request.UserRequest;
 import com.whf.music.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +41,7 @@ public class UserController {
      * 删除用户
      */
     @GetMapping("/delete")
+    @Log(module = "用户管理", description = "删除用户", businessType = BusinessType.DELETE, operatorType = OperatorType.CLIENT)
     public R<Boolean> deleteUser(@RequestParam Integer id) {
         return R.success(userService.removeById(id));
     }
@@ -47,6 +51,7 @@ public class UserController {
      * 更新用户信息
      */
     @PostMapping("/update")
+    @Log(module = "用户管理", description = "更新用户信息", businessType = BusinessType.UPDATE, operatorType = OperatorType.CLIENT)
     public R<Boolean> updateUserMsg(@RequestBody UserRequest updateRequest) {
         Boolean result = userService.updateUserMsg(updateRequest);
         return R.success(result, result ? "更新信息成功！" : "更新信息失败，请重试！");
@@ -56,6 +61,7 @@ public class UserController {
      * 更新用户密码
      */
     @PostMapping("/updatePassword")
+    @Log(module = "用户管理", description = "更新用户密码", businessType = BusinessType.UPDATE, operatorType = OperatorType.CLIENT)
     public R<Boolean> updatePassword(@RequestBody UserRequest updatePasswordRequest) {
         Boolean result = userService.updatePassword(updatePasswordRequest);
         return R.success(result, result ? "更新密码成功！" : "更新密码失败，请重试！");
@@ -65,6 +71,7 @@ public class UserController {
      * 更新用户头像
      */
     @PostMapping("/avatar/update")
+    @Log(module = "用户管理", description = "更新用户头像", businessType = BusinessType.UPDATE, operatorType = OperatorType.CLIENT)
     public R<Boolean> updateUserPic(@RequestParam("file") MultipartFile avatorFile, @RequestParam("id") Long id) {
         Boolean result = userService.updateUserAvator(avatorFile, id);
         return R.success(result, result ? "更新头像成功！" : "更新头像失败，请重试！");
