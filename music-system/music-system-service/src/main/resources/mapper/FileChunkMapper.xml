@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.whf.music.mapper.FileChunkMapper">
+
+    <resultMap id="BaseResultMap" type="com.whf.music.domain.FileChunk">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="fileName" column="file_name" jdbcType="VARCHAR"/>
+            <result property="fileType" column="file_type" jdbcType="INTEGER"/>
+            <result property="chunkNumber" column="chunk_number" jdbcType="INTEGER"/>
+            <result property="totalChunk" column="total_chunk" jdbcType="INTEGER"/>
+            <result property="chunkSize" column="chunk_size" jdbcType="BIGINT"/>
+            <result property="totalSize" column="total_size" jdbcType="BIGINT"/>
+            <result property="chunkMd5" column="chunk_md5" jdbcType="VARCHAR"/>
+            <result property="fileMd5" column="file_md5" jdbcType="VARCHAR"/>
+            <result property="relativePath" column="relative_path" jdbcType="VARCHAR"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,file_name,file_type,
+        chunk_number,total_chunk,chunk_size,
+        total_size,chunk_md5,file_md5,
+        relative_path,create_time,update_time
+    </sql>
+</mapper>

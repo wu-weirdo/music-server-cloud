@@ -31,4 +31,14 @@ public class Constants {
      * 登录用户 redis key
      */
     public static final String LOGIN_TOKEN_KEY = "login:tokens:";
+
+    /**
+     * 文件根路径
+     */
+    public static final String FILE_ROOT_PATH = "D://upload//";
+
+    /**
+     * 默认的分片大小：20MB
+     */
+    public static final long DEFAULT_CHUNK_SIZE = 20 * 1024 * 1024;
 }

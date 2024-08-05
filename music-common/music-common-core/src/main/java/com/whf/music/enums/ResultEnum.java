@@ -13,6 +13,9 @@ public enum ResultEnum {
     PARAMETER_ERROR(1001, "请求参数有误!"),
 
     FILE_UPLOAD_ERROR(2001, "文件上传失败!"),
+    UPLOAD_FILE_NOT_NULL(2002, "上传文件不能为空"),
+    OVER_FILE_MAX_SIZE(2003, "超出文件大小"),
+    CREATE_DIR_ERROR(2004, "创建目录失败"),
 
     USER_NOT_EXIST(3001, "用户不存在!"),
     USERNAME_PASSWORD_ERROR(3002, "账号或密码错误!"),
