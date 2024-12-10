@@ -19,5 +19,6 @@
         <module>music-common-core</module>
         <module>music-common-swagger</module>
         <module>music-common-log</module>
+        <module>music-common-nacos</module>
     </modules>
 </project>

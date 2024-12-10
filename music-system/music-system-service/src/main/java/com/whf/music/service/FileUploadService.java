@@ -11,7 +11,6 @@ import java.util.Map;
  * @author whf
  * @date 2024/3/7
  */
-@Service
 public interface FileUploadService {
 
     /**

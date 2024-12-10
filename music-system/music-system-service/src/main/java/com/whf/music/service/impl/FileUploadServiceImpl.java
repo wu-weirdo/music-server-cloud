@@ -12,6 +12,7 @@ import com.whf.music.service.FileInfoService;
 import com.whf.music.service.FileUploadService;
 import com.whf.music.service.SingerService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 import sun.misc.Cleaner;
@@ -34,6 +35,7 @@ import java.util.*;
  * @date 2024/3/7
  */
 @Slf4j
+@Service
 public class FileUploadServiceImpl implements FileUploadService {
 
     @Resource

@@ -7,16 +7,39 @@
 #    url: jdbc:mysql://47.96.95.29:3306/music?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai
 #    username: root
 #    password: whf0710.
+#    hikari:
+#      maximum-pool-size: 10
+#      minimum-idle: 1
+#      connection-timeout: 30000
+#      idle-timeout: 600000
+#      max-lifetime: 1800000
+#      keepalive-time: 600000
 #
 #  redis:
 #    host: 47.96.95.29
 #    port: 6379
 #    database: 0
-#    timeout: 10000
+#    timeout: 3000
 #
 #  mvc:
 #    pathmatch:
 #      matching-strategy: ANT_PATH_MATCHER
+#
+#  cloud:
+#    # sentinel 配置
+#    sentinel:
+#      # nacos配置持久化
+#      datasource:
+#        ds1:
+#          nacos:
+#            server-addr: ${spring.cloud.nacos.config.server-addr}
+#            dataId: sentinel-${spring.application.name}-${spring.profiles.active}.json
+#            groupId: ${spring.cloud.nacos.config.group}
+#            username: ${spring.cloud.nacos.username}
+#            password: ${spring.cloud.nacos.password}
+#            namespace: sentinel-rule
+#            data-type: json
+#            rule-type: flow
 #
 #mybatis-plus:
 #  mapper-locations: classpath*:/mapper/*.xml
