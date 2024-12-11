@@ -14,6 +14,11 @@
     <dependencies>
         <dependency>
             <groupId>com.whf</groupId>
+            <artifactId>music-common-core</artifactId>
+            <version>${revision}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.whf</groupId>
             <artifactId>music-common-redis</artifactId>
             <version>${revision}</version>
         </dependency>
@@ -25,12 +30,6 @@
             <groupId>me.zhyd.oauth</groupId>
             <artifactId>JustAuth</artifactId>
             <version>${justauth.version}</version>
-        </dependency>
-        <!-- Token生成与解析-->
-        <dependency>
-            <groupId>io.jsonwebtoken</groupId>
-            <artifactId>jjwt</artifactId>
-            <version>0.9.1</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>

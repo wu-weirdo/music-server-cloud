@@ -48,7 +48,7 @@ public class R<T> implements Serializable {
     }
 
     public static <T> R<T> error(Integer code, String msg) {
-        return restResult(null, ResultEnum.ERROR.getCode(), msg, false);
+        return restResult(null, code, msg, false);
     }
 
     public static <T> R<T> error(ResultEnum resultEnum) {

@@ -3,15 +3,13 @@ package com.whf.music.config;
 import com.whf.music.filter.JwtAuthenticationTokenFilter;
 import com.whf.music.handler.AuthenticationEntryPointImpl;
 import com.whf.music.handler.LogoutSuccessHandlerImpl;
+import com.whf.music.properties.ApiProperties;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
@@ -26,8 +24,8 @@ import java.util.List;
 @Configuration
 public class SecurityFilterConfig extends WebSecurityConfigurerAdapter {
 
-    @Value("${ignoreUrls}")
-    private List<String> ignoreUrls;
+    @Resource
+    private ApiProperties apiProperties;
 
     /**
      * token认证过滤器
@@ -76,7 +74,7 @@ public class SecurityFilterConfig extends WebSecurityConfigurerAdapter {
                 // 过滤请求
                 .authorizeRequests()
                 // 对于登录login 注册register 验证码captchaImage 允许匿名访问
-                .antMatchers(ignoreUrls.toArray(new String[0])).permitAll()
+                .antMatchers(apiProperties.getIgnoreUrls().toArray(new String[0])).permitAll()
                 // 除上面外的所有请求全部需要鉴权认证
                 .anyRequest().authenticated()
                 .and()

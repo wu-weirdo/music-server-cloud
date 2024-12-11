@@ -28,10 +28,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Collection;
-import java.util.Date;
-import java.util.Map;
-import java.util.StringJoiner;
+import java.util.*;
 
 /**
  * @author whf
@@ -84,9 +81,11 @@ public class LogAspect {
             event.setOperatorType(operationLog.operatorType().ordinal());
 
             LoginUser user = SecurityUtils.getUser();
-            // 设置操作人信息
-            event.setOperatorId(user.getId());
-            event.setOperatorName(user.getUsername());
+            if (Objects.nonNull(user)) {
+                // 设置操作人信息
+                event.setOperatorId(user.getId());
+                event.setOperatorName(user.getUsername());
+            }
 
             // 请求相关
             HttpServletRequest request = HttpContextUtils.getHttpServletRequest();
@@ -124,7 +123,7 @@ public class LogAspect {
             // 发布事件
             applicationContext.publishEvent(event);
         } catch (Exception ex) {
-            log.error("save log error:{}", ExceptionUtils.getExceptionInfo(e));
+            log.error("save log error:{}", ExceptionUtils.getExceptionInfo(ex));
         }
     }
 

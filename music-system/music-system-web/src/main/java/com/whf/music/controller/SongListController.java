@@ -7,6 +7,8 @@ import com.whf.music.enums.BusinessType;
 import com.whf.music.enums.OperatorType;
 import com.whf.music.request.SongListRequest;
 import com.whf.music.service.SongListService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -21,6 +23,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/songList")
+@Tag(name = "专辑管理")
 public class SongListController {
 
     @Autowired
@@ -31,6 +34,7 @@ public class SongListController {
      * 添加专辑
      */
     @PostMapping("/add")
+    @Operation(summary = "添加专辑")
     @Log(module = "专辑管理", description = "添加专辑", businessType = BusinessType.INSERT, operatorType = OperatorType.MANAGE)
     public R<Boolean> addSongList(@RequestBody SongListRequest addSongListRequest) {
         Boolean result = songListService.addSongList(addSongListRequest);
@@ -41,6 +45,7 @@ public class SongListController {
      * 删除专辑
      */
     @GetMapping("/delete")
+    @Operation(summary = "删除专辑")
     @Log(module = "专辑管理", description = "删除专辑", businessType = BusinessType.DELETE, operatorType = OperatorType.MANAGE)
     public R<Boolean> deleteSongList(@RequestParam Integer id) {
         Boolean result = songListService.deleteSongList(id);
@@ -54,6 +59,7 @@ public class SongListController {
      * @return {@code R<List<SongList>>}
      */
     @PostMapping("/list")
+    @Operation(summary = "查询专辑列表")
     public R<List<SongList>> getSongList(@RequestBody SongListRequest request) {
         return R.success(songListService.getSongList(request));
     }
@@ -66,6 +72,7 @@ public class SongListController {
      * @return {@code R<Boolean>}
      */
     @PostMapping("/update")
+    @Operation(summary = "更新专辑信息")
     @Log(module = "专辑管理", description = "更新专辑信息", businessType = BusinessType.UPDATE, operatorType = OperatorType.MANAGE)
     public R<Boolean> updateSongListMsg(@RequestBody SongListRequest request) {
         Boolean result = songListService.updateSongListMsg(request);
@@ -81,6 +88,7 @@ public class SongListController {
      * @return {@code R<Boolean>}
      */
     @PostMapping("/img/update")
+    @Operation(summary = "更新专辑图片")
     @Log(module = "专辑管理", description = "更新专辑图片", businessType = BusinessType.UPDATE, operatorType = OperatorType.MANAGE)
     public R<Boolean> updateSongListPic(@RequestParam("file") MultipartFile avatorFile, @RequestParam("id") Integer id) {
         Boolean result = songListService.updateSongListImg(avatorFile, id);

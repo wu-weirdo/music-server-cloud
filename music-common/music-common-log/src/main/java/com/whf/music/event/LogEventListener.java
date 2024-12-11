@@ -1,6 +1,6 @@
 package com.whf.music.event;
 
-import com.whf.music.domain.SysLog;
+import com.whf.music.domin.SysLogRemote;
 import com.whf.music.dubbo.LogRemoteService;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.beans.BeanUtils;
@@ -22,7 +22,7 @@ public class LogEventListener {
     @Async
     @EventListener
     public void saveLog(OperationLogEvent operationLogEvent) {
-        SysLog sysLog = new SysLog();
+        SysLogRemote sysLog = new SysLogRemote();
         BeanUtils.copyProperties(operationLogEvent, sysLog);
         sysLog.setCreateTime(operationLogEvent.getOperationTime());
         sysLog.setUpdateTime(operationLogEvent.getOperationTime());

@@ -9,6 +9,8 @@ import com.whf.music.enums.BusinessType;
 import com.whf.music.enums.OperatorType;
 import com.whf.music.reponse.TreeResponse;
 import com.whf.music.service.VideoService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -18,13 +20,14 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * (Video)表控制层
+ * 视频管理
  *
  * @author whf
  * @since 2023-04-14 10:00:29
  */
 @RestController
 @RequestMapping("/video/")
+@Tag(name = "视频管理")
 public class VideoController {
     /**
      * 服务对象
@@ -39,6 +42,7 @@ public class VideoController {
      * @return 所有数据
      */
     @PostMapping("list")
+    @Operation(summary = "获取所有视频")
     public R<List<Video>> selectAll(@RequestBody Video video) {
         QueryWrapper<Video> queryWrapper = new QueryWrapper<>(video);
         queryWrapper.eq(Objects.nonNull(video.getName()), "name", video.getName());
@@ -53,6 +57,7 @@ public class VideoController {
      * @return 单条数据
      */
     @GetMapping("detail")
+    @Operation(summary = "获取视频详情")
     public R<Video> selectOne(@RequestParam Serializable id) {
         return R.success(this.videoService.getById(id));
     }
@@ -64,6 +69,7 @@ public class VideoController {
      * @return 新增结果
      */
     @PostMapping("add")
+    @Operation(summary = "新增视频")
     @Log(module = "视频管理", description = "新增视频", businessType = BusinessType.UPDATE, operatorType = OperatorType.MANAGE)
     public R<Boolean> insert(@RequestBody Video video, @RequestParam("file") MultipartFile file) {
         return R.success(this.videoService.addVideo(video, file));
@@ -76,6 +82,7 @@ public class VideoController {
      * @return 修改结果
      */
     @PostMapping("update")
+    @Operation(summary = "更新视频信息")
     @Log(module = "视频管理", description = "更新视频信息", businessType = BusinessType.UPDATE, operatorType = OperatorType.MANAGE)
     public R<Boolean> update(@RequestBody Video video) {
         boolean result = this.videoService.updateById(video);
@@ -89,6 +96,7 @@ public class VideoController {
      * @return 删除结果
      */
     @GetMapping("delete")
+    @Operation(summary = "删除视频")
     @Log(module = "视频管理", description = "删除视频", businessType = BusinessType.DELETE, operatorType = OperatorType.MANAGE)
     public R<Boolean> delete(@RequestParam("idList") List<Long> idList) {
         boolean result = this.videoService.removeByIds(idList);
@@ -103,6 +111,7 @@ public class VideoController {
      * @return {@code R}
      */
     @PostMapping("img/update")
+    @Operation(summary = "更新视频图片")
     @Log(module = "视频管理", description = "更新视频图片", businessType = BusinessType.UPDATE, operatorType = OperatorType.MANAGE)
     public R<Boolean> updatePic(@RequestParam("file") MultipartFile urlFile, @RequestParam("id") Integer id) {
         boolean result = videoService.updatePic(urlFile, id);
@@ -117,6 +126,7 @@ public class VideoController {
      * @return {@code R}
      */
     @PostMapping("url/update")
+    @Operation(summary = "更新视频文件")
     @Log(module = "视频管理", description = "更新视频文件", businessType = BusinessType.UPDATE, operatorType = OperatorType.MANAGE)
     public R<Boolean> updateVideo(@RequestParam("file") MultipartFile urlFile, @RequestParam("id") Integer id) {
         boolean result = videoService.updateVideo(urlFile, id);
@@ -129,6 +139,7 @@ public class VideoController {
      * @return {@code R}
      */
     @GetMapping("tree")
+    @Operation(summary = "歌手视频树")
     public R<List<TreeResponse>> singerVideoTree() {
         return R.success(videoService.singerVideoTree());
     }

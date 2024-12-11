@@ -1,19 +1,23 @@
 package com.whf.music.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.whf.music.entity.LoginUser;
+import com.whf.music.enums.ResultEnum;
+import com.whf.music.excepetion.ServiceException;
+import com.whf.music.properties.ApiProperties;
+import com.whf.music.utils.ExceptionUtils;
 import com.whf.music.utils.IdUtils;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -26,43 +30,11 @@ import java.util.concurrent.TimeUnit;
 @Component
 public class TokenService {
 
-    /**
-     * 令牌自定义标识
-     */
-    @Value("${jwt.header:Authorization}")
-    private String header;
-
-    /**
-     * 令牌秘钥
-     */
-    @Value("${jwt.secret:abcdefghijklmnopqrstuvwxyz}")
-    private String secret;
-
-    /**
-     * 令牌有效期（默认30分钟）
-     */
-    @Value("${jwt.expiration:30}")
-    private int expiration;
-
-    private static final Long MILLIS_MINUTE_TWENTY = 20 * 60 * 1000L;
-
-    /**
-     * token 前缀
-     */
-    private static final String TOKEN_PREFIX = "Bearer ";
-
-    /**
-     * 令牌前缀
-     */
-    public static final String LOGIN_USER_KEY = "login_user_key";
-
-    /**
-     * 登录用户 redis key
-     */
-    public static final String LOGIN_TOKEN_KEY = "login:tokens:";
+    @Resource
+    private ApiProperties apiProperties;
 
     @Resource
-    private RedisTemplate<String, LoginUser> redisTemplate;
+    private RedisTemplate<String, String> redisTemplate;
 
     public LoginUser getLoginUser(HttpServletRequest request) {
         String accessToken = getAccessToken(request);
@@ -70,11 +42,18 @@ public class TokenService {
             return null;
         }
         Claims claims = getClaimsFromToken(accessToken);
-        String token = (String) claims.get(LOGIN_USER_KEY);
+        String token = (String) claims.get(ApiProperties.LOGIN_USER_KEY);
         if (StringUtils.isBlank(token)) {
             return null;
         }
-        return redisTemplate.opsForValue().get(LOGIN_TOKEN_KEY + token);
+        try {
+            String user = redisTemplate.opsForValue().get(ApiProperties.LOGIN_TOKEN_KEY + token);
+            ObjectMapper mapper = new ObjectMapper();
+            return mapper.readValue(user, LoginUser.class);
+        } catch (JsonProcessingException e) {
+            log.error("getLoginUser error:{}", ExceptionUtils.getExceptionInfo(e));
+            throw new ServiceException(ResultEnum.ERROR);
+        }
     }
 
     /**
@@ -82,7 +61,7 @@ public class TokenService {
      * @param loginUser
      */
     public void deleteLoginUser(LoginUser loginUser) {
-        redisTemplate.delete(LOGIN_TOKEN_KEY + loginUser.getToken());
+        redisTemplate.delete(ApiProperties.LOGIN_TOKEN_KEY + loginUser.getToken());
     }
 
     /**
@@ -96,8 +75,8 @@ public class TokenService {
         loginUser.setToken(token);
         refreshToken(loginUser);
         Map<String, Object> claims = new HashMap<String, Object>();
-        claims.put(LOGIN_USER_KEY, token);
-        return Jwts.builder().setClaims(claims).signWith(SignatureAlgorithm.HS512, secret).compact();
+        claims.put(ApiProperties.LOGIN_USER_KEY, token);
+        return Jwts.builder().setClaims(claims).signWith(SignatureAlgorithm.HS512, apiProperties.getSecret()).compact();
     }
 
     /**
@@ -111,9 +90,16 @@ public class TokenService {
         if (expireTime == null) {
             expireTime = 0L;
         }
-        if (expireTime - currentTime <= MILLIS_MINUTE_TWENTY) {
-            loginUser.setExpireTime(expireTime + (long) expiration * 60 * 1000);
-            redisTemplate.opsForValue().set(LOGIN_TOKEN_KEY + loginUser.getToken(), loginUser, expiration, TimeUnit.MINUTES);
+        if (expireTime - currentTime <= apiProperties.getRefreshTime()) {
+            loginUser.setExpireTime(expireTime + (long) apiProperties.getExpiration() * 60 * 1000);
+            try {
+                ObjectMapper mapper = new ObjectMapper();
+                String string = mapper.writeValueAsString(loginUser);
+                redisTemplate.opsForValue().set(ApiProperties.LOGIN_TOKEN_KEY + loginUser.getToken(), string, apiProperties.getExpiration(), TimeUnit.MINUTES);
+            } catch (JsonProcessingException e) {
+                log.error("getLoginUser error:{}", ExceptionUtils.getExceptionInfo(e));
+                throw new ServiceException(ResultEnum.ERROR);
+            }
         }
     }
 
@@ -121,12 +107,12 @@ public class TokenService {
      * 获取 AccessToken
      */
     private String getAccessToken(HttpServletRequest request) {
-        String accessToken = request.getHeader(header);
+        String accessToken = request.getHeader(apiProperties.getHeader());
         if (StringUtils.isBlank(accessToken)) {
             return null;
         }
-        if (accessToken.startsWith(TOKEN_PREFIX)) {
-            accessToken = accessToken.substring(TOKEN_PREFIX.length());
+        if (accessToken.startsWith(apiProperties.getPrefix())) {
+            accessToken = accessToken.substring(apiProperties.getPrefix().length());
         }
         return accessToken;
     }
@@ -138,7 +124,7 @@ public class TokenService {
         Claims claims = null;
         try {
             claims = Jwts.parser()
-                    .setSigningKey(secret)
+                    .setSigningKey(apiProperties.getSecret())
                     .parseClaimsJws(token)
                     .getBody();
         } catch (Exception e) {

@@ -12,10 +12,16 @@
     <description>music-server 网关</description>
 
     <dependencies>
-        <!--nacos注册中心-->
+        <!-- 公用模块 -->
         <dependency>
             <groupId>com.whf</groupId>
-            <artifactId>music-common-nacos</artifactId>
+            <artifactId>music-common-core</artifactId>
+            <version>${revision}</version>
+        </dependency>
+        <!-- Redis模块 -->
+        <dependency>
+            <groupId>com.whf</groupId>
+            <artifactId>music-common-redis</artifactId>
             <version>${revision}</version>
         </dependency>
         <!-- Sentinel Gateway -->

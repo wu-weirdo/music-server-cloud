@@ -18,12 +18,12 @@ import java.util.stream.Collectors;
  * @date 2024/3/5
  */
 @Data
-@JsonIgnoreProperties({"enabled", "accountNonExpired", "accountNonLocked", "credentialsNonExpired", "authorities", "password", "username"})
+@JsonIgnoreProperties({"enabled", "accountNonExpired", "accountNonLocked", "credentialsNonExpired", "authorities", "password"})
 public class LoginUser implements UserDetails {
 
     private Long id;
 
-    private String userName;
+    private String username;
 
     private String password;
 
@@ -87,7 +87,7 @@ public class LoginUser implements UserDetails {
 
     @Override
     public String getUsername() {
-        return this.userName;
+        return this.username;
     }
 
     @Override

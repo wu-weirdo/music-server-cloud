@@ -1,6 +1,6 @@
 package com.whf.music.dubbo;
 
-import com.whf.music.domain.SysLog;
+import com.whf.music.domin.SysLogRemote;
 
 /**
  * @author whf
@@ -12,5 +12,5 @@ public interface LogRemoteService {
      * 保存日志
      * @param sysLog 日志
      */
-    void saveLog(SysLog sysLog);
+    void saveLog(SysLogRemote sysLog);
 }

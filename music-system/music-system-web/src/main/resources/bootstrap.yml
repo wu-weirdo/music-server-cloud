@@ -15,6 +15,6 @@ spring:
         namespace: @nacos.namespace@
         group: @nacos.group@
         file-extension: yaml
-#  config:
-#    import:
-#      - optional:nacos:common-dev.yaml
+  config:
+    import:
+      - optional:nacos:music-common-dev.yaml

@@ -1,0 +1,9 @@
+#server:
+#  port: 8090
+#
+#jwt:
+#  header: Authorization
+#  secret: abcdefghijklmnopqrstuvwxyz
+#  # token 过期时间/分钟
+#  expiration: 30
+#  prefix: Bearer

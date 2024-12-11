@@ -1,0 +1,25 @@
+#spring:
+#  redis:
+#    host: 47.96.95.29
+#    port: 6379
+#    database: 0
+#    timeout: 10000
+#  cloud:
+#    # 网关配置
+#    gateway:
+#      routes:
+#        # 系统模块
+#        - id: music-system
+#          uri: lb://music-system
+#          predicates:
+#            - Path=/system/**
+#          filters:
+#            - StripPrefix=1
+#
+#        # 权限模块
+#        - id: music-auth
+#          uri: lb://music-auth
+#          predicates:
+#            - Path=/auth/**
+#          filters:
+#            - StripPrefix=1

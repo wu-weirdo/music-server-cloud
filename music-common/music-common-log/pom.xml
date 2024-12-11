@@ -14,12 +14,17 @@
     <dependencies>
         <dependency>
             <groupId>com.whf</groupId>
-            <artifactId>music-system-api</artifactId>
+            <artifactId>music-common-dubbo</artifactId>
             <version>${revision}</version>
         </dependency>
         <dependency>
             <groupId>com.whf</groupId>
-            <artifactId>music-common-core</artifactId>
+            <artifactId>music-api-system</artifactId>
+            <version>${revision}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.whf</groupId>
+            <artifactId>music-common-security</artifactId>
             <version>${revision}</version>
         </dependency>
         <dependency>

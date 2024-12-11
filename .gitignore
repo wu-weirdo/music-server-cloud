@@ -6,3 +6,4 @@
 /music-common/music-common-swagger/target/
 /music-system/target/
 .flattened-pom.xml
+/music-system/music-system-service/target/

@@ -15,31 +15,9 @@
 #      max-lifetime: 1800000
 #      keepalive-time: 600000
 #
-#  redis:
-#    host: 47.96.95.29
-#    port: 6379
-#    database: 0
-#    timeout: 3000
-#
 #  mvc:
 #    pathmatch:
 #      matching-strategy: ANT_PATH_MATCHER
-#
-#  cloud:
-#    # sentinel 配置
-#    sentinel:
-#      # nacos配置持久化
-#      datasource:
-#        ds1:
-#          nacos:
-#            server-addr: ${spring.cloud.nacos.config.server-addr}
-#            dataId: sentinel-${spring.application.name}-${spring.profiles.active}.json
-#            groupId: ${spring.cloud.nacos.config.group}
-#            username: ${spring.cloud.nacos.username}
-#            password: ${spring.cloud.nacos.password}
-#            namespace: sentinel-rule
-#            data-type: json
-#            rule-type: flow
 #
 #mybatis-plus:
 #  mapper-locations: classpath*:/mapper/*.xml
@@ -54,21 +32,6 @@
 #dubbo:
 #  application:
 #    name: music-system
-#  protocol:
-#    # 如需使用 Triple 3.0 新协议 可查看官方文档
-#    # 使用 dubbo 协议通信
-#    name: dubbo
-#    # dubbo 协议端口(-1表示自增端口,从20880开始)
-#    port: -1
-#  # 指定dubbo协议注册ip
-#  registry:
-#    address: nacos://localhost:8848?namespace=music-server-cloud
-#    username: nacos
-#    password: nacos
-#  # 消费者相关配置
-#  consumer:
-#    timeout: 5000
-#  # 超时时间
 #  scan:
 #    # 接口实现类扫描
 #    base-packages: com.whf.music.dubbo
@@ -83,5 +46,3 @@
 #music:
 #  security:
 #    initPassword: 123456
-#
-#ignoreUrls: /login,/register,/resource/**,/swagger-ui/*,/webjars/*,/v3/api-docs/*,/v3/*

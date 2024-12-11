@@ -1,19 +1,17 @@
 package com.whf.music.service.impl;
 
+import com.whf.music.domin.UserRemote;
+import com.whf.music.dubbo.UserRemoteService;
 import com.whf.music.entity.LoginUser;
-import com.whf.music.enums.ResultEnum;
 import com.whf.music.excepetion.ServiceException;
-import com.whf.music.domain.User;
 import com.whf.music.request.LoginRequest;
 import com.whf.music.request.RegisterRequest;
 import com.whf.music.request.ThirdLoginRequest;
 import com.whf.music.service.LoginService;
 import com.whf.music.service.TokenService;
-import com.whf.music.service.UserService;
 import com.whf.music.third.ThirdAuthenticationToken;
 import com.whf.music.third.ThirdLogin;
 import com.whf.music.utils.ExceptionUtils;
-import com.whf.music.utils.SecurityUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -23,7 +21,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.Date;
 
 /**
  * @author whf
@@ -40,7 +37,7 @@ public class LoginServiceImpl implements LoginService {
     private TokenService tokenService;
 
     @Resource
-    private UserService userService;
+    private UserRemoteService userRemoteService;
 
     /**
      * 登录
@@ -76,16 +73,9 @@ public class LoginServiceImpl implements LoginService {
      */
     @Override
     public Boolean register(RegisterRequest request) {
-        User user = new User();
+        UserRemote user = new UserRemote();
         BeanUtils.copyProperties(request, user);
-        if (userService.existUser(request.getUserName())) {
-            throw new ServiceException(ResultEnum.PARAMETER_ERROR.getCode(), "用户名已注册");
-        }
-        String password = SecurityUtils.encryptPassword(request.getPassword());
-        user.setPassword(password);
-        user.setAvator("/resource/img/avatorImages/user.jpg");
-        user.setCreateTime(new Date());
-        return userService.save(user);
+        return userRemoteService.register(user);
     }
 
     /**
