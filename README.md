@@ -2,53 +2,32 @@
 
 <br/>
 
-<h1 align="center"><font color="red">声明</font></h1>
+## 项目说明
 
-**重写[music-website](https://github.com/Yin-Hongwei/music-website) 服务端为微服务**
-
+保持理智音乐网站 前端使用**Vue**，后端使用**SpringCloudAlibaba**，基于[music-website](https://github.com/Yin-Hongwei/music-website),主要包含李志、赵雷
 <br/>
 
 ## 项目预览
 
 > 前台截图预览
 
-![](https://tva1.sinaimg.cn/large/e6c9d24ely1h1gjdm8x3jj21c00u00ui.jpg)<br/>
+![image](https://github.com/user-attachments/assets/06706b8f-a952-4752-a138-87bb54ddeb79)<br/>
 
-![](https://tva1.sinaimg.cn/large/e6c9d24ely1h1gje55hgxj21c00u0n3v.jpg)<br/>
+![image](https://github.com/user-attachments/assets/798ffe31-8c80-4906-affe-a0e15b2ffe49)<br/>
 
-![](https://tva1.sinaimg.cn/large/e6c9d24ely1h1gk5fxmwxj21c00u0wm2.jpg)<br/>
+![image](https://github.com/user-attachments/assets/0858f4e2-d808-464f-b474-74ccde1f6e32)<br/>
 
-![](https://tva1.sinaimg.cn/large/e6c9d24ely1h1gk5rtelgj21c00u00w7.jpg)<br/>
-
-![](https://tva1.sinaimg.cn/large/e6c9d24ely1h1gk6a1b8wj21c00u0tf2.jpg)<br/>
-
-![](https://tva1.sinaimg.cn/large/e6c9d24ely1h1gkl6bu35j21c00u00wb.jpg)<br/>
-
-![](https://tva1.sinaimg.cn/large/e6c9d24ely1h1gklntw77j21c00u077j.jpg)<br/>
-
-![](https://tva1.sinaimg.cn/large/e6c9d24ely1h1gkokestbj21c00u0ju8.jpg)<br/>
-
-![](https://tva1.sinaimg.cn/large/e6c9d24ely1h1gknhg12sj21c00u00v4.jpg)
-
-<br/>
-
-![](https://tva1.sinaimg.cn/large/e6c9d24ely1h1gknu0rszj21c00u0jto.jpg)<br/>
-
-![](https://tva1.sinaimg.cn/large/e6c9d24ely1h1gkoxoehnj21c00u0q5j.jpg)<br/>
+![image](https://github.com/user-attachments/assets/ab56644b-1afd-4838-9c68-fab4a11510f5)<br/>
 
 > 后台截图预览
 
-![](https://tva1.sinaimg.cn/large/e6c9d24ely1h158xvsdvij21c00u0wi8.jpg)<br/>
+![image](https://github.com/user-attachments/assets/9ed2190d-7729-47a0-985b-e7614df82cb3)<br/>
 
-![](https://tva1.sinaimg.cn/large/e6c9d24ely1h159x0re56j21c00u077a.jpg)<br/>
+![image](https://github.com/user-attachments/assets/c9056022-f529-4351-b0ae-53e2ae575fb3)<br/>
 
-![](https://tva1.sinaimg.cn/large/e6c9d24ely1h159xzbi85j21c00u0whn.jpg)<br/>
+![image](https://github.com/user-attachments/assets/a9acad66-f242-4a46-bd28-d02e8407d471)<br/>
 
-![](https://tva1.sinaimg.cn/large/e6c9d24ely1h159zewsh4j21c00u079f.jpg)<br/>
-
-![](https://tva1.sinaimg.cn/large/e6c9d24ely1h159yz5x8hj21c00u0win.jpg)<br/>
-
-![](https://tva1.sinaimg.cn/large/e6c9d24ely1h159yo2nzmj21c00u0djp.jpg)<br/>
+![image](https://github.com/user-attachments/assets/82eadf8a-669f-4455-843a-01c864f70287)<br/>
 
 ## 项目功能
 
