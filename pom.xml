@@ -84,6 +84,8 @@
         <module>music-common</module>
         <module>music-gateway</module>
         <module>music-system</module>
+        <module>music-api</module>
+        <module>music-auth</module>
     </modules>
     <packaging>pom</packaging>
 

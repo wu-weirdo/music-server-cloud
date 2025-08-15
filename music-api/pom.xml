@@ -13,4 +13,8 @@
 
     <packaging>pom</packaging>
 
+    <modules>
+        <module>music-api-system</module>
+    </modules>
+
 </project>

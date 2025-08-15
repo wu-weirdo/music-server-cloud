@@ -20,5 +20,7 @@
         <module>music-common-swagger</module>
         <module>music-common-log</module>
         <module>music-common-nacos</module>
+        <module>music-common-dubbo</module>
+        <module>music-common-sentinel</module>
     </modules>
 </project>
